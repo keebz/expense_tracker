@@ -53,10 +53,10 @@ $(function(){
     purchase.price = parseInt($("input#amount").val());
     currentCategory.addPurchase(purchase);
 
-    currentCategory.purchases.forEach(function(purchase){
-      $("table#lists").append('<tr>' + "<td>" + "Item | " + purchase.description + "  " + "</td>" + " " + "<td>" + "Price | $" + purchase.price + "</td>" + '</tr>');
-       $("table#lists").empty();
-    });
+
+    // $("table#lists").empty();
+    $("table#lists").append('<tr>' + "<td>" + "Item | " + purchase.description + "  " + "</td>" + " " + "<td>" + "Price | $" + purchase.price + "</td>" + '</tr>');
+
 
 
     $("h4#total").text("$" + currentCategory.totalCost());
