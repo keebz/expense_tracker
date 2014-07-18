@@ -11,6 +11,18 @@
     <div class = "container">
       <h1>Expense Organizer</h1>
           <div class = "col-md-6">
+            <form id= "category">
+              <div class="form-group">
+                <label for="categories">Add Category</label>
+                <input id="categories" type = "text" placeholder = "add a category.." class="form-control">
+              </div>
+              <button type= "submit" class="btn">Add Category!</button>
+            </form>
+             <ul id="categories"></ul>
+          </div>
+
+          <div class = "col-md-6">
+            <h3 id="categoryTitle"></h3>
             <form id= "purchases">
              <div class="form-group">
                 <label for="descript">Add Purchase</label>
@@ -19,20 +31,18 @@
                 <input id="amount" type = "number" placeholder = "Amount.." class="form-control">
              </div>
               <button type= "submit" class="btn btn-success">Track!</button>
-            </form>
-          <div id="result">
+          <div>
             <h5><u>ITEM LIST</u></h5>
             <table id="lists" class="table-striped" style="width:300px">
             </table>
             <table class="table-striped" style="width:300px">
-            <tr>
-            <td><h4>Total</h4> <h4 id="total"></h4></td>
-
-            <td><h4>Quantity</h4> <h4 id="quantity"></h4></td>
-
-            </tr>
+              <tr>
+                <td><h4>Total</h4> <h4 id="total"></h4></td>
+                <td><h4>Quantity</h4> <h4 id="quantity"></h4></td>
+              </tr>
             </table>
           </div>
+            </form>
       </div>
     </div>
     </div>

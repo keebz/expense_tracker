@@ -1,31 +1,65 @@
-var Purchase = {
-  totalCost: 0,
-  totalQuantity: 0,
-  purchaseValue: function(amount) {
-    this.totalCost = this.totalCost + amount;
+var Category = {
+  addPurchase: function(purchase) {
+    this.purchases.push(purchase);
   },
-  quantityValue: function(quantity) {
-    this.totalQuantity = this.totalQuantity + quantity;
+  totalCost: function() {
+    var total = 0;
+    this.purchases.forEach(function(purchase) {
+      total += purchase.price;
+    });
+    return total;
+  },
+  totalQuantity: function() {
+    return this.purchases.length
   }
-}; // gives total amount purchased
+}
 
+var Purchase = {};
+
+//For adding category//
 $(function(){
-  $("form").submit(function(event){
+  var currentCategory;
+  $("form#category").submit(function(event){
     event.preventDefault();
-    item = $("input#descript").val();
-    price = parseInt($("input#amount").val());
-    $("table#lists").append('<tr>' + "<td>" + "Item | " + item + "  " + "</td>" + " " + "<td>" + "Price | $" + price + "</td>" + '</tr>')
-    // $("tr").after("<td>" + "Price | $" + price + "</td>");
-    var counter = 0;
-    Purchase.quantityValue(counter += 1);
-    Purchase.purchaseValue(price);
+    inputtedCategory = $("input#categories").val();
+    $("ul#categories").append("<li><span class='category'>" + inputtedCategory + "</span></li>");
 
-    $("h4#total").text("$" + Purchase.totalCost);
-    $("h4#quantity").text(Purchase.totalQuantity);
-    $("#result").show();
+    var category = Object.create(Category);
+    category.purchases = [];
+    category.name = inputtedCategory;
 
-    // purchases.purchaseValue();
-  //   totalCost += shipment.packageCost;
-  //   $(".total").text("$" + totalCost.toFixed(2));
+    $("ul#categories li").last().click(function(){
+      currentCategory = category;
+      $("form#purchases").show();
+      $("#categoryTitle").text(currentCategory.name)
+      $("h4#total").text("$" + currentCategory.totalCost());
+      $("h4#quantity").text(currentCategory.totalQuantity());
+      $("table#lists").empty();
+
+       currentCategory.purchases.forEach(function(purchase){
+        $("table#lists").append('<tr>' + "<td>" + "Item | " + purchase.description + "  " + "</td>" + " " + "<td>" + "Price | $" + purchase.price + "</td>" + '</tr>');
+
+    });
+
+    })
+    $("input#categories").val("");
+  });
+
+//For adding items and price//
+  $("form#purchases").submit(function(event){
+    event.preventDefault();
+    var purchase  = Object.create(Purchase);
+    purchase.description = $("input#descript").val();
+    purchase.price = parseInt($("input#amount").val());
+    currentCategory.addPurchase(purchase);
+
+    currentCategory.purchases.forEach(function(purchase){
+      $("table#lists").append('<tr>' + "<td>" + "Item | " + purchase.description + "  " + "</td>" + " " + "<td>" + "Price | $" + purchase.price + "</td>" + '</tr>');
+       $("table#lists").empty();
+    });
+
+
+    $("h4#total").text("$" + currentCategory.totalCost());
+    $("h4#quantity").text(currentCategory.totalQuantity());
   })
 });

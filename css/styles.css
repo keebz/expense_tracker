@@ -1,3 +1,17 @@
-#result{
+#result {
   display: none;
 }
+
+form#purchases{
+  display: none;
+}
+
+.category {
+  cursor: pointer;
+  color: purple;
+}
+
+.category:hover {
+  text-decoration: underline;
+}
+
