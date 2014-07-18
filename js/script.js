@@ -38,14 +38,12 @@ $(function(){
 
        currentCategory.purchases.forEach(function(purchase){
         $("table#lists").append('<tr>' + "<td>" + "Item | " + purchase.description + "  " + "</td>" + " " + "<td>" + "Price | $" + purchase.price + "</td>" + '</tr>');
-
-    });
-
+        });
     })
     $("input#categories").val("");
   });
 
-//For adding items and price//
+
   $("form#purchases").submit(function(event){
     event.preventDefault();
     var purchase  = Object.create(Purchase);
@@ -53,13 +51,10 @@ $(function(){
     purchase.price = parseInt($("input#amount").val());
     currentCategory.addPurchase(purchase);
 
-
-    // $("table#lists").empty();
     $("table#lists").append('<tr>' + "<td>" + "Item | " + purchase.description + "  " + "</td>" + " " + "<td>" + "Price | $" + purchase.price + "</td>" + '</tr>');
-
-
-
     $("h4#total").text("$" + currentCategory.totalCost());
     $("h4#quantity").text(currentCategory.totalQuantity());
+    $("input#descript").val("");
+    $("input#amount").val("");
   })
 });
